@@ -1,0 +1,54 @@
+
+let nombreDelPasajero;
+let edadDelPasajero;
+let DestinoDelVuelo;
+let ClaseDelVuelo;
+let PesoDelEquipaje;
+let ApellidoDelPiloto;
+let respuesta = "si";
+let contadorIngresantes = 0;
+
+
+    while (respuesta == "si")
+    {
+         nombreDelPasajero = prompt ("Ingrese el nombre del pasajero");
+
+         edadDelPasajero = prompt ("Ingrese la edad del pasajero");
+         edadDelPasajero = parseInt(edadDelPasajero);
+
+         while (isNaN(edadDelPasajero) || edadDelPasajero > 90 || edadDelPasajero < 15)
+         {
+            edadDelPasajero = prompt ("Reingrese la edad del pasajero");
+            edadDelPasajero = parseInt(edadDelPasajero);
+         }
+
+         DestinoDelVuelo = prompt("Ingrese el destino del vuelo");
+
+         ClaseDelVuelo = prompt ("Ingrese la clase del vuelo");
+
+         while(ClaseDelVuelo != "ejecutiva" && ClaseDelVuelo != "primera" && ClaseDelVuelo != "turista" && ClaseDelVuelo != "semi-ejecutiva" )
+         {
+            ClaseDelVuelo = prompt ("Reingrese la clase del vuelo");
+
+         }
+
+         PesoDelEquipaje = prompt ("Ingrese el peso del equipaje");
+         PesoDelEquipaje = parseFloat(PesoDelEquipaje);
+
+         while(isNaN(PesoDelEquipaje) || PesoDelEquipaje < 0)
+         {
+            PesoDelEquipaje = prompt ("Reingrese el peso del equipaje");
+            PesoDelEquipaje = parseFloat(PesoDelEquipaje);
+
+         }
+
+         ApellidoDelPiloto = prompt("Ingrese el apellido del piloto");
+        
+         contadorIngresantes++;
+
+         respuesta = prompt("Desea ingresar otro integrante?");
+
+        }
+        
+        console.log(nombreDelPasajero + " " + edadDelPasajero + " " + DestinoDelVuelo + " " + ClaseDelVuelo + " " + PesoDelEquipaje + " " + ApellidoDelPiloto + " " + contadorIngresantes);
+
