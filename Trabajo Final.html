@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gestión de Vuelos - Aerolínea</title>
+  <link rel="stylesheet" href="Trabajo Final.css">
+  <script src="TrabajoFinal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Vuelos - Aerolínea</h1>
+
+    <h2>Agregar Vuelo</h2>
+    <label for="origen">Origen:</label>
+    <input type="text" id="origen">
+
+    <label for="destino">Destino:</label>
+    <input type="text" id="destino">
+
+    <label for="duracion">Duración:</label>
+    <input type="text" id="duracion">
+
+    <label for="precio">Precio:</label>
+    <input type="text" id="precio">
+
+    <button onclick="agregarVuelo()">Agregar Vuelo</button>
+
+    <h2>Buscar Vuelo</h2>
+    <label for="buscar-origen">Origen:</label>
+    <input type="text" id="buscar-origen">
+
+    <label for="buscar-destino">Destino:</label>
+    <input type="text" id="buscar-destino">
+
+    <button onclick="buscarVuelos()">Buscar Vuelos</button>
+
+    <h2>Vuelos Disponibles</h2>
+    <div class="lista-vuelos" id="vuelos-lista"></div>
+
+    <h2>Compra de Pasajes</h2>
+    <div id="vuelo-seleccionado"></div>
+
+    <form id="formulario-compra">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre">
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido">
+
+      <label for="cantidad-pasajeros">Cantidad de Pasajeros:</label>
+      <input type="number" id="cantidad-pasajeros">
+      <button onclick="realizarCompra(event)">Realizar Compra</button>
+    </form>
+
+    <div id="mensaje-compra"></div>
+
+    <h2>Vuelos Comprados</h2>
+    <div id="vuelos-comprados"></div>
+  </div>
+</body>
+</html>
+
+<script> 
+  
+  function mostrarVuelos(vuelos) {
+    const listaVuelos = document.getElementById('vuelos-lista');
+    listaVuelos.innerHTML = '';
+    
+    if (vuelos.length === 0) {
+      const mensaje = document.createElement('p');
+      mensaje.textContent = 'No se encontraron vuelos';
+      listaVuelos.appendChild(mensaje);
+    } else {
+      const tabla = document.createElement('table');
+      const encabezado = tabla.createTHead().insertRow();
+      encabezado.innerHTML = '<th>Origen</th><th>Destino</th><th>Duración</th><th>Precio</th><th></th>';
+      
+      const cuerpo = tabla.createTBody();
+      
+      vuelos.forEach((vuelo) => {
+        const fila = cuerpo.insertRow();
+        fila.innerHTML = `<td>${vuelo.origen}</td><td>${vuelo.destino}</td><td>${vuelo.duracion}</td><td>${vuelo.precio}</td><td><button onclick="seleccionarVuelo('${vuelo.origen}', '${vuelo.destino}', '${vuelo.duracion}', '${vuelo.precio}')">Seleccionar</button></td>`;
+      });
+      
+      listaVuelos.appendChild(tabla);
+    }
+  }
+
+  function actualizarListaVuelos() {
+    const vuelos = aerolinea.listarVuelos();
+    mostrarVuelos(vuelos);
+  }
+
+// Función para actualizar la sección de vuelos comprados en la página
+function actualizarVuelosComprados() {
+  mostrarVuelosComprados();
+}
+
+    agregarVuelosDeEjemplo();
+    actualizarListaVuelos();
+  </script>
